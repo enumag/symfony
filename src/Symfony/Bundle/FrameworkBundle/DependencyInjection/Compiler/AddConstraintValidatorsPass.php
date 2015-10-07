@@ -25,7 +25,7 @@ class AddConstraintValidatorsPass implements CompilerPassInterface
         $validators = array();
         foreach ($container->findTaggedServiceIds('validator.constraint_validator') as $id => $attributes) {
             if (isset($attributes[0]['alias'])) {
-                $validators[$attributes[0]['alias']] = $id;
+                $validators[$attributes[0]['alias'] === 'validator.expression' ? 'Symfony\Component\Validator\Constraints\ExpressionValidator' : $attributes[0]['alias']] = $id;
             }
         }
 
