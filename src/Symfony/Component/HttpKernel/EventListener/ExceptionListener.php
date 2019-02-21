@@ -79,6 +79,10 @@ class ExceptionListener implements EventSubscriberInterface
 
             $this->logException($e, sprintf('Exception thrown when handling an exception (%s: %s at %s line %s)', $f->getClass(), $f->getMessage(), $e->getFile(), $e->getLine()));
 
+            if ($exception === $e) {
+                throw $e;
+            }
+
             $wrapper = $e;
 
             while ($prev = $wrapper->getPrevious()) {
